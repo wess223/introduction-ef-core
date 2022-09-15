@@ -1,7 +1,7 @@
 ﻿using EntroductionEF.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EntroductionEF.Repositories.cs
+namespace EntroductionEF.Data
 {
     public class DataContext : DbContext
     {
