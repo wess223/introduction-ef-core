@@ -12,6 +12,6 @@ namespace EntroductionEF.Models
         public TypeShipping TypeShipping { get; set; }
         public StatusServiceOrder Status { get; set; }
         public string Observation { get; set; }
-        public ICollection<SolicitationItem> SolicitationItemList { get; set; }
+        public ICollection<SolicitationItem> ItemList { get; set; }
     }
 }
