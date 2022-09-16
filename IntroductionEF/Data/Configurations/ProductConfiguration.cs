@@ -1,8 +1,8 @@
-﻿using EntroductionEF.Models;
+﻿using IntroductionEF.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EntroductionEF.Data.Configurations
+namespace IntroductionEF.Data.Configurations
 {
     public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {

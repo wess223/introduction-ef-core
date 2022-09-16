@@ -1,4 +1,4 @@
-﻿namespace EntroductionEF.Enums
+﻿namespace IntroductionEF.Enums
 {
     public enum TypeProduct
     {

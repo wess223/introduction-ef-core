@@ -1,8 +1,8 @@
-﻿using EntroductionEF.Models;
+﻿using IntroductionEF.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EntroductionEF.Data.Configurations
+namespace IntroductionEF.Data.Configurations
 {
     public class SolicitationConfiguration : IEntityTypeConfiguration<Solicitation>
     {
@@ -13,7 +13,7 @@ namespace EntroductionEF.Data.Configurations
             builder.Property(p => p.StartDate).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
             builder.Property(p => p.Status).HasConversion<string>();
             builder.Property(p => p.TypeShipping).HasConversion<int>();
-            builder.Property(p => p.Observation).HasColumnType("VARCHAR()512");
+            builder.Property(p => p.Observation).HasColumnType("VARCHAR(512)");
 
             builder.HasMany(p => p.ItemList)
             .WithOne(p => p.Solicitation)

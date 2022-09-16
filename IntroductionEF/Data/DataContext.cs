@@ -1,8 +1,8 @@
-﻿using EntroductionEF.Data.Configurations;
-using EntroductionEF.Models;
+﻿using IntroductionEF.Data.Configurations;
+using IntroductionEF.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EntroductionEF.Data
+namespace IntroductionEF.Data
 {
     public class DataContext : DbContext
     {

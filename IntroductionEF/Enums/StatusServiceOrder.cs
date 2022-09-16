@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntroductionEF.Enums
+namespace IntroductionEF.Enums
 {
     public enum StatusServiceOrder
     {

@@ -1,6 +1,6 @@
-﻿using EntroductionEF.Enums;
+﻿using IntroductionEF.Enums;
 
-namespace EntroductionEF.Models
+namespace IntroductionEF.Models
 {
     public class Solicitation
     {
