@@ -14,7 +14,7 @@ namespace IntroductionEF.Data
             options.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=IntroductionEFCore; Integrated Security=True");
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Aplique a configuração para todas as classes concretas que estão implementando IEntityTypeConfiguration nesse assembly.
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
