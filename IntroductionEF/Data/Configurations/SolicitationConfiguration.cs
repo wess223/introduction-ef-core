@@ -11,7 +11,7 @@ namespace IntroductionEF.Data.Configurations
             builder.ToTable("Solicitations");
             builder.HasKey(p => p.Id);
             builder.Property(p => p.StartDate).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
-            builder.Property(p => p.Status).HasConversion<string>();
+            builder.Property(p => p.Status).HasConversion<string>().HasMaxLength(30);
             builder.Property(p => p.TypeShipping).HasConversion<int>();
             builder.Property(p => p.Observation).HasColumnType("VARCHAR(512)");
 

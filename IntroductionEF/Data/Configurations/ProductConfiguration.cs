@@ -13,7 +13,7 @@ namespace IntroductionEF.Data.Configurations
             builder.Property(p => p.BarCode).HasColumnType("VARCHAR(14)").IsRequired();
             builder.Property(p => p.Description).HasColumnType("VARCHAR(60)");
             builder.Property(p => p.Value).IsRequired();
-            builder.Property(p => p.TypeProduct).HasConversion<string>();
+            builder.Property(p => p.TypeProduct).HasConversion<string>().HasMaxLength(30);
         }
     }
 }
