@@ -22,5 +22,6 @@ namespace IntroductionEF.Data
 
 
         public DbSet<Solicitation> Solicitations { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }
