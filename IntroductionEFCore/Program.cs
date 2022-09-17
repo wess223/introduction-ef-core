@@ -9,7 +9,58 @@ namespace IntroductionEFCore.Program
     {
         public static void Main(string[] args)
         {
-            InsertDados();
+            // InsertDados();
+            InsertDadosDivers();
+        }
+
+        private static void InsertDadosDivers()
+        {
+            var product = new Product
+            {
+                Description = "Produto2",
+                BarCode = "88888",
+                Value = 8m,
+                TypeProduct = TypeProduct.Embalagem,
+                Active = true,
+            };
+
+            var client = new Client
+            {
+                Name = "Bruno",
+                Cep = "60556897",
+                City = "Fortaleza",
+                State = "CE",
+                Telephone = "85956412332"
+            };
+
+            var clientList = new[]
+            {
+                new Client
+                {
+                    Name = "Souza",
+                    Cep = "2222233",
+                    City = "Fortaleza",
+                    State = "CE",
+                    Telephone = "85956412332"
+                },
+                new Client
+                {
+                    Name = "Silva",
+                    Cep = "9898989",
+                    City = "Fortaleza",
+                    State = "CE",
+                    Telephone = "85956412332"
+                }
+            };
+
+            using var db = new DataContext();
+            //db.AddRange(product, client);
+            //db.AddRange(clientList);
+            db.Set<Client>().AddRange(clientList);
+
+            var registers = db.SaveChanges();
+
+            Console.WriteLine($"Total Registro(s): {registers}");
         }
 
         private static void InsertDados()
