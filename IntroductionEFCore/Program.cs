@@ -9,8 +9,9 @@ namespace IntroductionEFCore.Program
     {
         public static void Main(string[] args)
         {
-            // InsertDados();
-            InsertDadosDivers();
+            //InsertDados();
+            //InsertDadosDivers();
+            ConsultDados();
         }
 
         private static void InsertDadosDivers()
@@ -88,6 +89,30 @@ namespace IntroductionEFCore.Program
 
         }
 
+        private static void ConsultDados()
+        {
+            using var db = new DataContext();
+
+            //var sintaxeConsult = (from c in db.Clients where c.Id > 0 select c).ToList();
+            var methodoConsult = db.Clients
+                .Where(p => p.Id > 0)
+                .OrderBy(x => x.Id)
+                .ToList();
+
+            foreach (var client in methodoConsult)
+            {
+                Console.WriteLine($"Consultando cliente: {client.Id}");
+                //db.Clients.Find(client.Id);
+                db.Clients.FirstOrDefault(x => x.Id == client.Id);
+            }
+
+            //quando uma consulta é feita, logo é criada um rastreamento para cada registro.
+            //Onde se algum desses registror houver mudança e em seguida chamar os SavaChanges as alterações serão aplicadas.
+            //Se quiser evitar o rastreio usa-se o attr AsNoTracking, assim as alterações não serão aplicadas.
+            //O methodo Find() busca os dados em memoria, se não trackeadas ele buscara na base de dados.
+
+
+        }
 
     }
 }
