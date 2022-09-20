@@ -23,7 +23,12 @@ namespace IntroductionEF.Data
             optionsBuilder
                 .UseLoggerFactory(_logger)
                 .EnableSensitiveDataLogging(true)
-                .UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=IntroductionEFCore; Integrated Security=True");
+                .UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=IntroductionEFCore; Integrated Security=True",
+                      p => p.EnableRetryOnFailure(
+                      maxRetryCount: 2,
+                      maxRetryDelay: TimeSpan.FromSeconds(5),
+                      errorNumbersToAdd: null));
+            //default se não configurar o EnabledRetryOnFailure ele irá tentar se conectar 6x ate completar 1 minuto.
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
