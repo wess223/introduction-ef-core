@@ -2,6 +2,7 @@
 using IntroductionEF.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace IntroductionEF.Data
 {
@@ -29,6 +30,29 @@ namespace IntroductionEF.Data
         {
             //Aplique a configuração para todas as classes concretas que estão implementando IEntityTypeConfiguration nesse assembly.
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
+            MappingPropertyForgotten(modelBuilder);
+        }
+
+        private static void MappingPropertyForgotten(ModelBuilder modelBuilder)
+        {
+            //carrega a lista de entidades da aplicação.
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                //obtenho todas as propriedades em string
+                var propertieList = entity.GetProperties().Where(x => x.ClrType == typeof(string));
+
+                foreach (var property in propertieList)
+                {
+                    //identificado se a regra foi aplicada
+                    //verifica se a coluna estar vazia e se tem um length definido
+                    if (string.IsNullOrEmpty(property.GetColumnType()) && !property.GetMaxLength().HasValue)
+                    {
+                        //seto um valor default
+                        //property.SetMaxLength(100);
+                        property.SetColumnType("VARCHAR(100)");
+                    }
+                }
+            }
         }
     }
 }
