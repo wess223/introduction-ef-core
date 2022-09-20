@@ -27,7 +27,8 @@ namespace IntroductionEF.Data
                       p => p.EnableRetryOnFailure(
                       maxRetryCount: 2,
                       maxRetryDelay: TimeSpan.FromSeconds(5),
-                      errorNumbersToAdd: null));
+                      errorNumbersToAdd: null)
+                      .MigrationsHistoryTable("HistoryEFCoreMigrations", null));
             //default se não configurar o EnabledRetryOnFailure ele irá tentar se conectar 6x ate completar 1 minuto.
         }
 
