@@ -14,7 +14,8 @@ namespace IntroductionEFCore.Program
             //InsertDadosDivers();
             //ConsultDados();
             //InsertSolicitation();
-            ConsultSolicitationAdvanced();
+            // ConsultSolicitationAdvanced();
+            UpdateDados();
         }
 
         private static void InsertDadosDivers()
@@ -92,6 +93,43 @@ namespace IntroductionEFCore.Program
 
         }
 
+        private static void UpdateDados()
+        {
+            using var db = new DataContext();
+            //var client = db.Clients.Find(3);
+
+
+            //exemplo alterando dados novos desconectados
+            var clientDesconected = new
+            {
+                Name = "Cliente desconectado",
+                Telephone = "789987987"
+            };
+            //db.Entry(client).CurrentValues.SetValues(clientDesconected);
+
+            //exemplo com td desconectado👇
+            var client1 = new Client
+            {
+                Id = 3
+            };
+
+            db.Attach(client1); //conecto ao registro no banco
+            db.Entry(client1).CurrentValues.SetValues(clientDesconected);
+
+            //--
+
+
+            //client.Name = "Cliente alterado passo 1.";
+            //com essa linha ele faz update em todo objeto mesmo mudando somente o nome.👇
+            //somente alterando a linha e chamando savechanges ele identifica que mudou somente o nome e altera somente aquela propriedade.👇
+            //db.Clients.Update(client); 
+
+            //outra forma de atualizar td o objeto👇
+            //db.Entry(client).State = EntityState.Modified;
+
+            db.SaveChanges();
+
+        }
         private static void ConsultDados()
         {
             using var db = new DataContext();
@@ -155,7 +193,7 @@ namespace IntroductionEFCore.Program
                 .Include(x => x.ItemList)
                 .ThenInclude(x => x.Product)
                 .ToList();
-            Console.WriteLine($"COUNT: { list.Count}");
+            Console.WriteLine($"COUNT: {list.Count}");
         }
     }
 }
