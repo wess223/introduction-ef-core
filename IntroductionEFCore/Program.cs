@@ -15,7 +15,8 @@ namespace IntroductionEFCore.Program
             //ConsultDados();
             //InsertSolicitation();
             // ConsultSolicitationAdvanced();
-            UpdateDados();
+            //UpdateDados();
+            RemoveDado();
         }
 
         private static void InsertDadosDivers()
@@ -67,7 +68,6 @@ namespace IntroductionEFCore.Program
 
             Console.WriteLine($"Total Registro(s): {registers}");
         }
-
         private static void InsertDados()
         {
             Product product = new Product
@@ -92,7 +92,6 @@ namespace IntroductionEFCore.Program
             Console.WriteLine($"Total Registros : {resgisters}.");
 
         }
-
         private static void UpdateDados()
         {
             using var db = new DataContext();
@@ -130,6 +129,19 @@ namespace IntroductionEFCore.Program
             db.SaveChanges();
 
         }
+        private static void RemoveDado()
+        {
+            using var db = new DataContext();
+           //var client = db.Clients.Find(7);
+            var clientDesconected = new Client { Id = 5 };
+
+            //db.Clients.Remove(client);
+            //db.Remove(client);
+            db.Entry(clientDesconected).State = EntityState.Deleted;
+
+            db.SaveChanges();
+        }
+
         private static void ConsultDados()
         {
             using var db = new DataContext();
@@ -154,7 +166,6 @@ namespace IntroductionEFCore.Program
 
 
         }
-
         private static void InsertSolicitation()
         {
             using var db = new DataContext();
@@ -185,7 +196,6 @@ namespace IntroductionEFCore.Program
             db.Solicitations.Add(solicitation);
             db.SaveChanges();
         }
-
         private static void ConsultSolicitationAdvanced()
         {
             using var db = new DataContext();
