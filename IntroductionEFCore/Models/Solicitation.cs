@@ -10,7 +10,7 @@ namespace IntroductionEF.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public TypeShipping TypeShipping { get; set; }
-        public StatusServiceOrder Status { get; set; }
+        public StatusSolicitation Status { get; set; }
         public string Observation { get; set; }
         public ICollection<SolicitationItem> ItemList { get; set; }
     }

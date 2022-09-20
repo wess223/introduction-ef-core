@@ -2,6 +2,7 @@
 using IntroductionEF.Data;
 using IntroductionEF.Enums;
 using IntroductionEF.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace IntroductionEFCore.Program
 {
@@ -11,7 +12,9 @@ namespace IntroductionEFCore.Program
         {
             //InsertDados();
             //InsertDadosDivers();
-            ConsultDados();
+            //ConsultDados();
+            //InsertSolicitation();
+            ConsultSolicitationAdvanced();
         }
 
         private static void InsertDadosDivers()
@@ -114,5 +117,45 @@ namespace IntroductionEFCore.Program
 
         }
 
+        private static void InsertSolicitation()
+        {
+            using var db = new DataContext();
+
+            var client = db.Clients.FirstOrDefault();
+            var product = db.Products.FirstOrDefault();
+
+            var solicitation = new Solicitation
+            {
+                ClientId = client.Id,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
+                Observation = "Pedido teste",
+                Status = StatusSolicitation.Analise,
+                TypeShipping = TypeShipping.SemFrete,
+                ItemList = new List<SolicitationItem>
+                {
+                    new SolicitationItem
+                    {
+                        ProductId = product.Id,
+                        Discount = 0,
+                        Quantity = 1,
+                        Value = 10
+                    }
+                }
+            };
+
+            db.Solicitations.Add(solicitation);
+            db.SaveChanges();
+        }
+
+        private static void ConsultSolicitationAdvanced()
+        {
+            using var db = new DataContext();
+            var list = db.Solicitations
+                .Include(x => x.ItemList)
+                .ThenInclude(x => x.Product)
+                .ToList();
+            Console.WriteLine($"COUNT: { list.Count}");
+        }
     }
 }
